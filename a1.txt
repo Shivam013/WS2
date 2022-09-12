@@ -1,0 +1,125 @@
+Script started on 2022-09-12 12:16:19-04:00
+1)
+================================================================================================
+shivam@sjsu:~[shivam@sjsu ~]$ cd ~/
+shivam@sjsu:~[shivam@sjsu ~]$ mkdir A1
+shivam@sjsu:~[shivam@sjsu ~]$ cd A1
+================================================================================================
+2)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu ~]$ pwd
+/home/shivam/A1
+shivam@sjsu:~/A1[shivam@sjsu A1]$ cd ../
+shivam@sjsu:~[shivam@sjsu ~]$ pwd
+/home/shivam
+================================================================================================
+3)
+================================================================================================
+shivam@sjsu:~[shivam@sjsu ~]$ id
+uid=1005(shivam) gid=1005(shivam) groups=1005(shivam)
+shivam@sjsu:~[shivam@sjsu ~]$ cd A1/
+shivam@sjsu:~/A1[shivam@sjsu A1]$ id
+uid=1005(shivam) gid=1005(shivam) groups=1005(shivam)
+================================================================================================
+4)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu A1]$ mkdir temp
+shivam@sjsu:~/A1[shivam@sjsu A1]$ chmod 677 temp
+shivam@sjsu:~/A1[shivam@sjsu A1]$ cd temp
+bash: cd: temp: Permission denied
+shivam@sjsu:~/A1[shivam@sjsu A1]$ ls
+temp
+shivam@sjsu:~/A1[shivam@sjsu A1]$ ls -l
+total 0
+drw-rwxrwx 2 shivam shivam 6 Sep 12 12:17 temp
+================================================================================================
+5)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu A1]$ mkdir temp2
+shivam@sjsu:~/A1[shivam@sjsu A1]$ mv temp2 temp3
+shivam@sjsu:~/A1[shivam@sjsu A1]$ cp temp3 temp2
+cp: -r not specified; omitting directory 'temp3'
+shivam@sjsu:~/A1[shivam@sjsu A1]$ cp -R temp3 temp2
+shivam@sjsu:~/A1[shivam@sjsu A1]$ ls
+temp temp2 temp3
+================================================================================================
+6)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu A1]$ cd /proc
+shivam@sjsu:/proc[shivam@sjsu proc]$ ls
+Through ls we see files meminfo and cpuinfo
+================================================================================================
+7)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu A1]$ head meminfo
+MemTotal:       73080640 kB     <-- TOTAL MEMORY
+MemFree:          523904 kB
+MemAvailable:   61677504 kB
+Buffers:            4224 kB
+Cached:         62395264 kB
+SwapCached:         5632 kB
+Active:         61685824 kB
+Inactive:         950336 kB
+Active(anon):     216256 kB
+Inactive(anon):   486144 kB
+================================================================================================
+8)
+================================================================================================
+shivam@sjsu:/proc[shivam@sjsu proc]$ tail cpuinfo 
+processor	: 255         <---------------------------(256 Processors 0-255)
+cpu		: POWER8 (architected), altivec supported
+clock		: 3525.000000MHz <------- 3.535 GHz
+================================================================================================
+9)
+================================================================================================
+shivam@sjsu:/proc[shivam@sjsu proc]$ cp /home/test/A1/downloaded_hashtags_extend.csv /home/shivam/A1
+shivam@sjsu:/[shivam@sjsu /]$ cd ..\
+shivam@sjsu:/[shivam@sjsu /]$ cd home/
+shivam@sjsu:/home[shivam@sjsu home]$ cd shivam/A1/
+shivam@sjsu:~/A1[shivam@sjsu A1]$ ls
+downloaded_hashtags_extend.csv temp temp2 temp3
+shivam@sjsu:~/A1[shivam@sjsu A1]$ wc downloaded_hashtags_extend.csv
+ 110350  220699 7822180 downloaded_hashtags_extend.csv
+shivam@sjsu:~/A1[shivam@sjsu A1]$ wc -c downloaded_hashtags_extend.csv 
+7822180 downloaded_hashtags_extend.csv
+
+110350 Lines | 0.00782218 gb
+
+================================================================================================
+10)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu A1]$ awk -F "," '{print $2}' downloaded_hashtags_extend.csv > hashtags
+shivam@sjsu:~/A1[shivam@sjsu A1]$ grep -i -h "GREAT" hashtags | sort | uniq | wc -l
+29
+================================================================================================
+11)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu A1]$ file downloaded_hashtags_extend.csv
+downloaded_hashtags_extend.csv: UTF-8 Unicode text
+================================================================================================
+12)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu A1]$ iconv -f utf-8 -t ascii//TRANSLIT downloaded_hashtags_extend.csv > ascii_hashtags
+shivam@sjsu:~/A1[shivam@sjsu A1]$ file ascii_hashtags 
+ascii_hashtags: ASCII text
+================================================================================================
+13)
+================================================================================================
+shivam@sjsu:~/A1[shivam@sjsu A1]$ head downloaded_hashtags_extend.csv
+author,hashtags,date,id
+shivam@sjsu:~/A1[shivam@sjsu A1]$ awk -F "," '{print $1}' downloaded_hashtags_extend.csv > users
+shivam@sjsu:~/A1[shivam@sjsu A1]$ sort users | uniq | tail -n +2 | wc -l
+Unique users: 176
+shivam@sjsu:~/A1[shivam@sjsu A1]$ awk -F "," '{print $4}' downloaded_hashtags_extend.csv > tweets
+shivam@sjsu:~/A1[shivam@sjsu A1]$ sort tweets | uniq | wc -l
+Unique Tweets: 64698
+shivam@sjsu:~/A1[shivam@sjsu A1]$ sort hashtags | uniq | tail -n +2 | wc -l
+Unique Hashtags: 20257
+
+More unique tweets than hashtags
+
+
+
+shivam@sjsu:~/A1[shivam@sjsu A1]$ exit
+
+Script done on 2022-09-12 12:31:35-04:00
